@@ -1,0 +1,34 @@
+[package]
+authors = ["Michael Gardner <mjgardner@abitofhelp.com>"]
+description = "This is an example application demostrating how to use Prost and Tonic."
+edition = "2021"
+homepage = "https://www.abitofhelp.com"
+keywords = ["rust", "protobuf", "prost", "tonic"]
+license-file = "LICENSE"
+name = "tonic_example"
+readme = "README.md"
+repository = "https://github.com/abitofhelp/tonic_example.git"
+rust-version = "1.76"
+version = "1.0.0"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[[bin]] # Bin to run the HelloWorld gRPC client
+name = "tonic_example_cient"
+path = "src/client.rs"
+
+[[bin]] # Bin to run the HelloWorld gRPC server
+name = "tonic_example_server"
+path = "src/server.rs"
+
+[dependencies]
+# Only necessary if using Protobuf well-known types.
+bytes = "1.5.0"
+prost = { version = "0.12.3", features = ["prost-derive"] }
+prost-types = { version = "0.12.3"}
+tokio = { version = "1.35.1", features = ["rt-multi-thread", "macros"] }
+tonic = { version = "0.10.2", features = ["gzip", "tls"] }
+chrono = "0.4.31"
+
+[build-dependencies]
+tonic-build = { version = "0.10.2", features = ["prost"] }
